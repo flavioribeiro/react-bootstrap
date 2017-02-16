@@ -42,11 +42,13 @@ export const bsStyles = curry((styles, defaultStyle, Component) => {
   let existing = Component.STYLES || [];
   let propTypes = Component.propTypes || {};
 
-  styles.forEach(style => {
-    if (existing.indexOf(style) === -1) {
-      existing.push(style);
-    }
-  });
+  if (Object.prototype.toString.call(styles) === '[object Array]') {
+    styles.forEach(style => {
+      if (existing.indexOf(style) === -1) {
+        existing.push(style);
+      }
+    });
+  }
 
   let propType = PropTypes.oneOf(existing);
 
